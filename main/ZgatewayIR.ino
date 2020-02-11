@@ -1,17 +1,17 @@
-/*  
-  OpenMQTTGateway  - ESP8266 or Arduino program for home automation 
+/*
+  OpenMQTTGateway  - ESP8266 or Arduino program for home automation
 
-   Act as a wifi or ethernet gateway between your 433mhz/infrared IR signal  and a MQTT broker 
+   Act as a wifi or ethernet gateway between your 433mhz/infrared IR signal  and a MQTT broker
    Send and receiving command by MQTT
- 
+
   This gateway enables to:
  - receive MQTT data from a topic and send IR signal corresponding to the received MQTT data
  - publish MQTT data to a different topic related to received IR signal
 
     Copyright: (c)Florian ROBERT
-  
+
     This file is part of OpenMQTTGateway.
-    
+
     OpenMQTTGateway is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -39,7 +39,7 @@ IRrecv irrecv(IR_RECEIVER_PIN, 1024, 15U, true);
 #else
 IRrecv irrecv(IR_RECEIVER_PIN);
 #endif
-IRsend irsend(IR_EMITTER_PIN);
+IRsend irsend(IR_EMITTER_PIN, true);
 #else
 #include <IRremote.h>
 IRrecv irrecv(IR_RECEIVER_PIN);

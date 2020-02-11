@@ -1,17 +1,17 @@
-/*  
-  OpenMQTTGateway  - ESP8266 or Arduino program for home automation 
+/*
+  OpenMQTTGateway  - ESP8266 or Arduino program for home automation
 
-   Act as a wifi or ethernet gateway between your 433mhz/infrared IR signal  and a MQTT broker 
+   Act as a wifi or ethernet gateway between your 433mhz/infrared IR signal  and a MQTT broker
    Send and receiving command by MQTT
- 
+
   This program enables to:
  - receive MQTT data from a topic and send signals corresponding to the received MQTT data
  - publish MQTT data to a different topic related to received signals
-  
+
     Copyright: (c)Florian ROBERT
-  
+
     This file is part of OpenMQTTGateway.
-    
+
     OpenMQTTGateway is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -39,11 +39,11 @@
  * - mqtt_pass
  * - mqtt_server
  * - mqtt_port
- * 
+ *
  * To completely disable WifiManager, define ESPWifiManualSetup.
  * If you do so, please don't forget to set these variables before compiling
- * 
- * Otherwise you can provide these credentials on the web interface after connecting 
+ *
+ * Otherwise you can provide these credentials on the web interface after connecting
  * to the access point with your password (SSID: WifiManager_ssid, password: WifiManager_password)
  */
 /*-------------DEFINE GATEWAY NAME BELOW IT CAN ALSO BE DEFINED IN platformio.ini----------------*/
@@ -51,7 +51,7 @@
   #define Gateway_Name "OpenMQTTGateway"
 #endif
 
-#define Base_Topic "home/"
+#define Base_Topic "6hull/"
 
 /*-------------DEFINE YOUR  NETWORK PARAMETERS BELOW----------------*/
 
@@ -60,24 +60,24 @@
   #if defined(ESP8266)||defined(ESP32)
     const byte ip[] = { 192, 168, 1, 99 }; //ip adress of the gateway, already defined for arduino below
   #endif
-  const byte gateway[] = { 0, 0, 0, 0 }; 
-  const byte Dns[] = { 0, 0, 0, 0 }; 
-  const byte subnet[] = { 255, 255, 255, 0 }; 
+  const byte gateway[] = { 0, 0, 0, 0 };
+  const byte Dns[] = { 0, 0, 0, 0 };
+  const byte subnet[] = { 255, 255, 255, 0 };
 #endif
 
 #if defined(ESP8266)||defined(ESP32)  // for nodemcu, weemos and esp8266
-  //#define ESPWifiManualSetup true //uncomment you don't want to use wifimanager for your credential settings on ESP
+  #define ESPWifiManualSetup true //uncomment you don't want to use wifimanager for your credential settings on ESP
 #else // for arduino boards
-  const byte ip[] = { 192, 168, 1, 99 }; 
+  const byte ip[] = { 192, 168, 1, 99 };
   const byte mac[] = {  0xDE, 0xED, 0xBA, 0xFE, 0x54, 0x95 }; //W5100 ethernet shield mac adress
 #endif
 
 #if defined(ESPWifiManualSetup) // for nodemcu, weemos and esp8266
-  #define wifi_ssid "wifi ssid"
-  #define wifi_password "wifi password"
+  #define wifi_ssid "noleechforyou"
+  #define wifi_password "3141592653"
 #endif
 
-#define WifiManager_password "your_password" //this is going to be the WPA2-PSK password for the initial setup access point 
+#define WifiManager_password "your_password" //this is going to be the WPA2-PSK password for the initial setup access point
 #define WifiManager_ssid Gateway_Name //this is the network name of the initial setup access point
 #define WifiManager_ConfigPortalTimeOut 120
 #define WifiManager_TimeOut 5
@@ -99,9 +99,9 @@
   #define parameters_size 15
   #define mqtt_topic_max_size 50
 #endif
-char mqtt_user[parameters_size] = "your_username"; // not compulsory only if your broker needs authentication
-char mqtt_pass[parameters_size] = "your_password"; // not compulsory only if your broker needs authentication
-char mqtt_server[parameters_size] = "192.168.1.17";
+char mqtt_user[parameters_size] = "tjhowse"; // not compulsory only if your broker needs authentication
+char mqtt_pass[parameters_size] = "rolEpol42"; // not compulsory only if your broker needs authentication
+char mqtt_server[parameters_size] = "192.168.1.50";
 char mqtt_port[6] = "1883";
 char mqtt_topic[mqtt_topic_max_size] = Base_Topic;
 char gateway_name[parameters_size * 2] = Gateway_Name;
@@ -112,7 +112,7 @@ char gateway_name[parameters_size * 2] = Gateway_Name;
 //Addons and module management, comment the Z line
 
 //#define ZgatewayRF     "RF"       //ESP8266, Arduino, ESP32
-//#define ZgatewayIR     "IR"       //ESP8266, Arduino,         Sonoff RF Bridge
+#define ZgatewayIR     "IR"       //ESP8266, Arduino,         Sonoff RF Bridge
 //#define ZgatewayLORA   "LORA"       //ESP8266, Arduino, ESP32
 //#define ZgatewayPilight "Pilight" //ESP8266, Arduino, ESP32
 //#define ZgatewayWeatherStation "WeatherStation" //ESP8266, Arduino, ESP32
@@ -132,7 +132,7 @@ char gateway_name[parameters_size * 2] = Gateway_Name;
 //#define ZsensorDHT     "DHT"      //ESP8266, Arduino, ESP32,  Sonoff RF Bridge
 //#define ZsensorDS1820  "DS1820"   //ESP8266, Arduino, ESP32
 //#define ZsensorGPIOKeyCode "GPIOKeyCode" //ESP8266, Arduino, ESP32
-//#define ZsensorGPIOInput "GPIOInput" //ESP8266, Arduino, ESP32
+#define ZsensorGPIOInput "GPIOInput" //ESP8266, Arduino, ESP32
 //#define ZmqttDiscovery "HADiscovery"//ESP8266, Arduino, ESP32, Sonoff RF Bridge
 //#define ZactuatorFASTLED "FASTLED"  //ESP8266, Arduino, ESP32, Sonoff RF Bridge
 
@@ -149,7 +149,7 @@ char gateway_name[parameters_size * 2] = Gateway_Name;
 #define jsonReceiving true //comment if you don't want to use Json  reception analysis
 
 //#define simplePublishing true //comment if you don't want to use simple publishing (one topic for one parameter)
-//example 
+//example
 // home/OpenMQTTGateway_ESP32_DEVKIT/BTtoMQTT/4XXXXXXXXXX4/rssi -63.0
 // home/OpenMQTTGateway_ESP32_DEVKIT/BTtoMQTT/4XXXXXXXXXX4/servicedata fe0000000000000000000000000000000000000000
 //#define simpleReceiving true //comment if you don't want to use old way reception analysis

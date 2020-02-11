@@ -1,15 +1,15 @@
-/*  
-  OpenMQTTGateway  - ESP8266 or Arduino program for home automation 
+/*
+  OpenMQTTGateway  - ESP8266 or Arduino program for home automation
 
-   Act as a wifi or ethernet gateway between your 433mhz/infrared IR signal  and a MQTT broker 
+   Act as a wifi or ethernet gateway between your 433mhz/infrared IR signal  and a MQTT broker
    Send and receiving command by MQTT
- 
-   This files enables to set your parameter for the infrared gateway 
-  
+
+   This files enables to set your parameter for the infrared gateway
+
     Copyright: (c)Florian ROBERT
-  
+
     This file is part of OpenMQTTGateway.
-    
+
     OpenMQTTGateway is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -27,7 +27,7 @@
 #define config_IR_h
 
 extern void setupIR();
-extern void IRtoMQTT();  
+extern void IRtoMQTT();
 extern void MQTTtoIR(char * topicOri, char * datacallback);
 extern void MQTTtoIR(char * topicOri, JsonObject& RFdata);
 /*-------------------IR topics & parameters----------------------*/
@@ -47,7 +47,7 @@ extern void MQTTtoIR(char * topicOri, JsonObject& RFdata);
 //#define DumpMode true // uncomment so as to see big dumps of IR codes
 
 #define pubIRunknownPrtcl false // key to avoid mqtt publication of unknown IR protocol (set to true if you want to publish unknown protocol)
-#define PanasonicAddress      0x4004     // Panasonic address (Pre data) 
+#define PanasonicAddress      0x4004     // Panasonic address (Pre data)
 
 #if defined(ESP8266) || defined(ESP32)  //IR supported protocols on ESP8266, all supported per default
   #define IR_GC
@@ -161,7 +161,7 @@ extern void MQTTtoIR(char * topicOri, JsonObject& RFdata);
   #ifdef ESP8266
     #define IR_EMITTER_PIN 16 //D0/ replace by 0 (D3) if you use IR LOLIN controller shield /replace by 5 with sonoff rf bridge
   #elif ESP32
-    #define IR_EMITTER_PIN 14
+    #define IR_EMITTER_PIN 9
   #elif __AVR_ATmega2560__
     #define IR_EMITTER_PIN 9
   #else
